@@ -211,29 +211,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(Location location) {
-
-        //1. is it the first found location
-        if (Util.getInstance().getCurrentLocation() == null) {                                                                                      //first locaion after App startUp
-            MyLocation loc = new MyLocation(location.getLatitude(), location.getLongitude());
-            Util.getInstance().setCurrentLocation(loc);
-        } else {                                                                                                                                                                       //Not the first  locaion after App startUp
-            MyLocation tmpLoc = new MyLocation(Util.getInstance().getCurrentLocation().getLat(),
-                    Util.getInstance().getCurrentLocation().getLon());                                                                              //current location
-            MyLocation refLoc = new MyLocation(location.getLatitude(), location.getLongitude());                  //reference location
-
-            //Update center of map if
-            if (Util.getInstance().calculateDistance(tmpLoc, refLoc) > Util.MAX_CENTER_LOC) {
-                //1. update current center location
-                MyLocation loc = Util.getInstance().getCurrentLocation();
-                loc.setLat(location.getLatitude());
-                loc.setLon(location.getLongitude());
-                //2. set new center position on the map
-                mServices.setLocation(loc);
-                presenter.setNewPosition();
-                //3. refresh places search and set the recyclerview
-                refreshPlacesAndReflectToMap();
-            }
-        }
+        mServices.setLocationUpdate(location);
+        //3. refresh places search and set the recyclerview
+        if (presenter.onLocationChanged())
+            refreshPlacesAndReflectToMap();
     }
 
     @Override
@@ -323,7 +304,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     //refresh places search and reflecton the MAP
-   private void refreshPlacesAndReflectToMap(){
+   public void refreshPlacesAndReflectToMap(){
        //3. refresh places search and set the recyclerview
        //3.1. clean DB
        presenter.clearDB();

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.GpsStatus;
-
+import android.location.Location;
 import com.example.prodigalson7.showme.DataBase.DataBaseConnector;
 import com.example.prodigalson7.showme.Model.MyLocation;
 import com.example.prodigalson7.showme.Model.MyStep;
@@ -47,6 +47,7 @@ public class ShowMeAroundServices implements IShowMeAround {
     private GoogleMap mMap;                                     //The google map
     private MyLocation location;                                  //a location clicked on the RecyclerView
     private Polyline mPolyline = null;                          //the route polyline
+    private Location locationUpdate;                        //new location from the GPS
 
     public ShowMeAroundServices(ShowMeActivityMVP.View view) {
         this.view = view;
@@ -200,6 +201,20 @@ public class ShowMeAroundServices implements IShowMeAround {
         }
     }
 
+    @Override
+    public void updateCurrentLocation(){
+        MyLocation loc = new MyLocation(locationUpdate.getLatitude(), locationUpdate.getLongitude());
+        Util.getInstance().setCurrentLocation(loc);
+    }
+
+
+    public Location getLocationUpdate() {
+        return locationUpdate;
+    }
+
+    public void setLocationUpdate(Location locationUpdate) {
+        this.locationUpdate = locationUpdate;
+    }
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Tools>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
   //scale image size

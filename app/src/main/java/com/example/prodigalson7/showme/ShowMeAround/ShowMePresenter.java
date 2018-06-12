@@ -196,6 +196,34 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
         mServices.onGpsStatusChanged(i);
     }
 
+    //onLocationChanged method for reacting to roaming higher than Util.MAX_CENTER_LOC
+    @Override
+    public boolean onLocationChanged(){
+        //1. is it the first found location
+        if (Util.getInstance().getCurrentLocation() == null){
+            mServices.updateCurrentLocation();
+        } else {
+            MyLocation tmpLoc = new MyLocation(Util.getInstance().getCurrentLocation().getLat(),
+                    Util.getInstance().getCurrentLocation().getLon());                                                                              //current location
+            MyLocation refLoc = new MyLocation(mServices.getLocationUpdate().getLatitude(),
+                                                                                 mServices.getLocationUpdate().getLongitude());                  //reference location
+
+            //Update center of map if distance from the current map center is higher than Util.MAX_CENTER_LOC
+            if (Util.getInstance().calculateDistance(tmpLoc, refLoc) > Util.MAX_CENTER_LOC) {
+                //1. update current center location
+                MyLocation loc = Util.getInstance().getCurrentLocation();
+                loc.setLat(mServices.getLocationUpdate().getLatitude());
+                loc.setLon(mServices.getLocationUpdate().getLongitude());
+                //2. set new center position on the map
+                mServices.setLocation(loc);
+                setNewPosition();
+                //3. refresh places search and set the recyclerview
+               return true;
+            }
+
+        }
+        return false;
+    }
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Properties>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 @Override

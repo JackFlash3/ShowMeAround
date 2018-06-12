@@ -53,6 +53,8 @@ public interface ShowMeActivityMVP {
         public void rxUnsubscribe();        //unsubscribe the Observable subscription
 
         public void onGpsStatusChanged(int i);    //apply when GPS cahnges status of connectivity
+
+        public boolean onLocationChanged();     //location change by GPS
     }
 
     interface Model {
