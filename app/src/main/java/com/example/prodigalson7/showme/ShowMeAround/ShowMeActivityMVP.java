@@ -52,7 +52,7 @@ public interface ShowMeActivityMVP {
 
         public void rxUnsubscribe();        //unsubscribe the Observable subscription
 
-
+        public void onGpsStatusChanged(int i);    //apply when GPS cahnges status of connectivity
     }
 
     interface Model {
@@ -69,6 +69,7 @@ public interface ShowMeActivityMVP {
 
         public Observable<Step> getRoutesFromNetwork2(final MyLocation location);       // //Load the route from target to destination for a given destination as location
 
+        public void rxUnsubscribe();                        //unsubscribe places subscription
         //  void createUser(String name, String lastName);
 
    //     User getUser();

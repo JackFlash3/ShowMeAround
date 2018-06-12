@@ -24,8 +24,8 @@ public class ShowMeModule {
 
     @Singleton
     @Provides
-    public Repository provideRepo(PlaceApiService placeApiService, TwitchAPI twitchAPI) {
-        return new ShowMeRepository(placeApiService, twitchAPI);
+    public Repository provideRepo(PlaceApiService placeApiService) {
+        return new ShowMeRepository(placeApiService);
     }
 
 

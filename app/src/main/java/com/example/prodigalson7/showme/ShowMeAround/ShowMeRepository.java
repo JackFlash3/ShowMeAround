@@ -24,13 +24,12 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ShowMeRepository implements Repository {
 
-    private TwitchAPI twitchAPI;
+
     private PlaceApiService placeApiService;
     private Disposable placesSubscriber = null;         //subscriber to placesObservable
 
-    public ShowMeRepository(PlaceApiService placeApiService, TwitchAPI twitchAPI) {
+    public ShowMeRepository(PlaceApiService placeApiService) {
         this.placeApiService = placeApiService;
-        this.twitchAPI = twitchAPI;
     }
 
     //clear the DB -- via Observables instead of Asynctask
@@ -108,6 +107,16 @@ public class ShowMeRepository implements Repository {
         }
     }
 
+    @Override
+    public void rxUnsubscribe() {
+
+        //2. unsubscribe clear DB subscriber
+        if (placesSubscriber != null) {
+            if (!placesSubscriber.isDisposed()) {
+                placesSubscriber.dispose();
+            }
+        }
+    }
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Tools>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
 
 

@@ -46,4 +46,5 @@ public interface IShowMeAround {
 
     public void rxUnsubscribe();        //Unsubscribe when finishing
 
+    public void onGpsStatusChanged(int i);      //apply when GPS cahnges status of connectivity
 }

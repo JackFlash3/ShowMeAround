@@ -23,4 +23,5 @@ public interface Repository {
 
     public void loadImagesFromNetwork(List<Target> dataTmp);                   //Load images of targets from the Network
 
+    public void rxUnsubscribe();            //unsubscribe places Observable subscription
 }

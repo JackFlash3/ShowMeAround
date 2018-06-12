@@ -108,8 +108,12 @@ public class ShowMeModel implements ShowMeActivityMVP.Model {
             });
         }
 
+    @Override
+    public void rxUnsubscribe(){
+            repository.rxUnsubscribe();
+    }
 
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Tools>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Tools>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//
         //clear the data List
         private void removeRecordsFromList() {
             Target target;

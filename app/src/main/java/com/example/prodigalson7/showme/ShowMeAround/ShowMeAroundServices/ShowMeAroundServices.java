@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.GpsStatus;
 
 import com.example.prodigalson7.showme.DataBase.DataBaseConnector;
 import com.example.prodigalson7.showme.Model.MyLocation;
@@ -187,7 +188,17 @@ public class ShowMeAroundServices implements IShowMeAround {
         }
     }
 
-
+    @Override
+    public void onGpsStatusChanged(int i) {
+        switch (i) {
+            case GpsStatus.GPS_EVENT_STOPPED:
+                Util.getInstance().setGps_alive(false);
+                break;
+            case GpsStatus.GPS_EVENT_STARTED:
+                Util.getInstance().setGps_alive(true);
+                break;
+        }
+    }
 
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Tools>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>//

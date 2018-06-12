@@ -47,7 +47,7 @@ TODO: 4. Implement RxJava methods - ok
 TODO: 4.1 replace all Asynctask methods with RxJava methods - ok
 TODO: 5. check the RecyclerView data - ok
 TODO: 6. Add OBservables to butoons: FAB, Settings, Cancel, Apply
-TODO: 7. Move the GPS from the presenter (?)
+TODO: 7. Move the GPS from the view (?)
 TODO: 8. Check if can multiple subscribe in searchplaces - ok
 TODO: 9. check routing by clicking markers and list targets - ok
 TODO: 9. Implement JUnit tests with Mockito
@@ -125,10 +125,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         this.loadFromSharedPreferences();
     }
 
-//ToDO: https://developers.google.com/places/web-service/search
-//ToDO: Google places API key: AIzaSyAc63LwuQZ_6yjFJvpkHyelI8DQavkcT0E
-//ToDO: Search shall be made: 1. When center location updates. 2. onResume() 3. after clicking the floating button
-
 //perform first search
     @Override
     protected void onResume() {
@@ -155,8 +151,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (Exception e){
             String msg = e.getMessage();
         }
-
   }
+
      @Override
      protected void onDestroy(){
            super.onDestroy();
@@ -202,22 +198,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void itemClicked(View view, MyLocation mLocation) {
         //1. set map camera on the new location
-        mServices.setLocation(mLocation);                //set the location in Services
+        mServices.setLocation(mLocation);                  //set the location in Services
         //2. draw the route between the center location and the destination
-        presenter.onLocationClicked();                  //draw the polyLine
-
+        presenter.onLocationClicked();                        //draw the polyLine
     }
 
+    //apply when GPS cahnges status of connectivity
     @Override
     public void onGpsStatusChanged(int i) {
-        switch (i) {
-            case GpsStatus.GPS_EVENT_STOPPED:
-                Util.getInstance().setGps_alive(false);
-                break;
-            case GpsStatus.GPS_EVENT_STARTED:
-                Util.getInstance().setGps_alive(true);
-                break;
-        }
+        presenter.onGpsStatusChanged(i);
     }
 
     @Override
@@ -241,22 +230,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 //2. set new center position on the map
                 mServices.setLocation(loc);
                 presenter.setNewPosition();
-
-            }
-            if (Util.getInstance().calculateDistance(tmpLoc, refLoc) > Util.MAX_DISTANCE) {
-                //2. refresh places search and set the recyclerview
-                //1. clean DB
-                presenter.clearDB();
-                //2. search for places
-                presenter.searchPlaces();
-                //3. load places from the DB
-                presenter.loadPlacesFromDB();
-                //4. add new markers
-                presenter.fillMap();
-                //5. download images
-                presenter.loadImages();
-                //6. Update the RecyclerView Adapter
-                targetsRVAdapter.notifyDataSetChanged();
+                //3. refresh places search and set the recyclerview
+                refreshPlacesAndReflectToMap();
             }
         }
     }
@@ -284,18 +259,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     View.OnClickListener fabListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            //1. clean DB
-            presenter.clearDB();
-            //2. search for places
-            presenter.searchPlaces();
-            //3. load places from the DB
-            presenter.loadPlacesFromDB();
-            //4. set new markers
-            presenter.fillMap();
-            //5. download images
-            presenter.loadImages();
-            //6. Update the RecyclerView Adapter
-            targetsRVAdapter.notifyDataSetChanged();
+            refreshPlacesAndReflectToMap();
         }
     };
 
@@ -357,4 +321,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         targetsRV.setLayoutManager(new LinearLayoutManager(this));
         targetsRVAdapter.setListener(this);                         //setting the delegate
     }
+
+    //refresh places search and reflecton the MAP
+   private void refreshPlacesAndReflectToMap(){
+       //3. refresh places search and set the recyclerview
+       //3.1. clean DB
+       presenter.clearDB();
+       //3.2. search for places
+       presenter.searchPlaces();
+       //3.3. load places from the DB
+       presenter.loadPlacesFromDB();
+       //3.4. add new markers
+       presenter.fillMap();
+       //3.5. download images
+       presenter.loadImages();
+       //3.6. Update the RecyclerView Adapter
+       targetsRVAdapter.notifyDataSetChanged();
+   }
 }

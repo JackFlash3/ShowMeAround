@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.view.KeyEvent;
 
 import com.example.prodigalson7.showme.DataBase.DataBaseConnector;
+import com.example.prodigalson7.showme.Model.MyLocation;
 import com.example.prodigalson7.showme.okhttp.apimodel.Step;
 import com.example.prodigalson7.showme.Model.Target;
 import com.example.prodigalson7.showme.Model.Util;
 import com.example.prodigalson7.showme.ShowMeAround.ShowMeAroundServices.ShowMeAroundServices;
-import com.example.prodigalson7.showme.okhttp.apimodelplaces.Result;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -25,15 +22,13 @@ import static com.example.prodigalson7.showme.Model.Util.Subject.Gym;
 import static com.example.prodigalson7.showme.Model.Util.Subject.Restaurant;
 import static com.example.prodigalson7.showme.Model.Util.Subject.Spa;
 
-
 public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
 
     private ShowMeActivityMVP.View view;    //will be null until we inject the Activity, dagger creates only the Repository, Presenter and the Model
-    private Disposable subscription = null;
     private DisposableObserver<String> clearDBSubscriber = null;                   //subscribing to clearing DB data Observable
     private DisposableObserver<String> loadFromDBSubscriber = null;         //subscribing to loading data from db Observable
-    private ShowMeActivityMVP.Model model;
-    private ShowMeAroundServices mServices;
+    private ShowMeActivityMVP.Model model;                                                  //dagger injection of the Model Layer
+    private ShowMeAroundServices mServices;                                                 //aid class  for boilerplate code
 
     //Variables
     private DataBaseConnector contactsDB;
@@ -150,6 +145,8 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
                 loadFromDBSubscriber.dispose();
             }
         }
+        //4. unsubscribe places subscriber
+        model.rxUnsubscribe();
     }
 
 
@@ -191,6 +188,12 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
     @Override
     public void fillMap(){
         mServices.fillMap(data);
+    }
+
+    //apply when GPS cahnges status of connectivity
+    @Override
+    public void onGpsStatusChanged(int i) {
+        mServices.onGpsStatusChanged(i);
     }
 
 
