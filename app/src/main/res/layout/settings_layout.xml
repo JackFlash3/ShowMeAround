@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_light"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:isScrollContainer="false">
+
+        <RelativeLayout
+            android:id="@+id/headerRL"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue">
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:gravity="center_vertical|left"
+                android:layout_marginStart="@dimen/settings_margin_start"
+                android:textColor="@color/white"
+                android:textSize="@dimen/settings_header_text_size"
+                android:text ="@string/settings_header"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/options_RL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/headerRL">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/settings_margin_top"
+                android:orientation="horizontal">
+                <TableRow
+                    android:weightSum="2" >
+                        <TextView
+                            android:id="@+id/coffee_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_alignParentStart="true"
+                            android:textColor="@color/light_blue"
+                            android:text="@string/coffee"
+                            android:textSize="@dimen/settings_text_size"
+                            android:gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:layout_marginStart="@dimen/settings_margin_start"
+                            tools:ignore="RtlHardcoded,SpUsage" />
+                        <CheckBox
+                            android:id="@+id/coffeeCB"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_toRightOf="@id/bars_tv"
+                            android:layout_marginStart="@dimen/checkbox_margin_start"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:textColor="@color/light_green"/>
+                </TableRow>
+                <TableRow
+                    android:weightSum="2" >
+                    <TextView
+                        android:id="@+id/bars_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/light_blue"
+                        android:text="@string/bars"
+                        android:gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/settings_text_size"
+                        android:layout_marginStart="@dimen/settings_margin_start"
+                        tools:ignore="RtlHardcoded,SpUsage" />
+                    <CheckBox
+                        android:id="@+id/barsCB"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:layout_toRightOf="@id/bars_tv"
+                        android:layout_marginStart="@dimen/checkbox_margin_start"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:textColor="@color/light_green"/>
+                </TableRow>
+                <TableRow
+                    android:weightSum="2" >
+                    <TextView
+                        android:id="@+id/dancebars_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/light_blue"
+                        android:gravity="center_vertical"
+                        android:text="@string/dancebar"
+                        android:textSize="@dimen/settings_text_size"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/settings_margin_start"
+                        tools:ignore="RtlHardcoded,SpUsage" />
+                    <CheckBox
+                        android:id="@+id/dancebarsCB"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@id/dancebars_tv"
+                        android:layout_marginStart="@dimen/checkbox_margin_start"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/light_green"/>
+                </TableRow>
+                <TableRow
+                    android:weightSum="2" >
+                    <TextView
+                        android:id="@+id/gym_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/light_blue"
+                        android:gravity="center_vertical"
+                        android:text="@string/gym_clubs"
+                        android:textSize="@dimen/settings_text_size"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/settings_margin_start"
+                        tools:ignore="RtlHardcoded,SpUsage" />
+                    <CheckBox
+                        android:id="@+id/gymCB"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@id/gym_tv"
+                        android:layout_marginStart="@dimen/checkbox_margin_start"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/light_green"/>
+                </TableRow>
+                <TableRow
+                    android:weightSum="2" >
+                    <TextView
+                        android:id="@+id/restaurants_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/light_blue"
+                        android:gravity="center_vertical"
+                        android:text="@string/restaurants"
+                        android:textSize="@dimen/settings_text_size"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/settings_margin_start"
+                        tools:ignore="RtlHardcoded,SpUsage" />
+                    <CheckBox
+                        android:id="@+id/restaurantCB"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@id/restaurants_tv"
+                        android:layout_marginStart="@dimen/checkbox_margin_start"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/light_green"/>
+                </TableRow>
+                <TableRow
+                    android:weightSum="2" >
+                    <TextView
+                        android:id="@+id/spa_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/light_blue"
+                        android:text="@string/spa"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/settings_text_size"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/settings_margin_start"
+                        tools:ignore="RtlHardcoded,SpUsage" />
+                    <CheckBox
+                        android:id="@+id/spaCB"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@id/spa_tv"
+                        android:layout_marginStart="@dimen/checkbox_margin_start"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/light_green"/>
+                </TableRow>
+                <TableRow
+                    android:weightSum="2" >
+                    <TextView
+                        android:id="@+id/atm_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:textColor="@color/light_blue"
+                        android:gravity="center_vertical"
+                        android:text="@string/atm"
+                        android:textSize="@dimen/settings_text_size"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/settings_margin_start"
+                        tools:ignore="RtlHardcoded,SpUsage" />
+                    <CheckBox
+                        android:id="@+id/atmCB"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_toRightOf="@id/atm_tv"
+                        android:layout_marginStart="@dimen/checkbox_margin_start"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/light_green"/>
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/settings_actions_RL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:layout_below="@+id/options_RL">
+        <!--"-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/applyBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_shape"
+                        android:text="@string/settings_apply"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/settings_button_text_size"
+                        android:textStyle="bold" />
+                    <Button
+                        android:id="@+id/cancelActionBtn"
+                        android:layout_toRightOf="@id/applyBtn"
+                        android:layout_width="120dp"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_shape"
+                        android:text="@string/settings_cancel"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/settings_button_text_size"
+                        android:textStyle="bold" />
+                </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

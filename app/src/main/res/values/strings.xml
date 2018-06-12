@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ShowMe</string>
+    <string name="title_activity_maps">ShowMe</string>
+    <string name="gym_clubs">Gyms</string>
+    <string name="coffee">Coffee Shops</string>
+    <string name="bars">Bars</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="dancebar">Dance bars</string>
+    <string name="spa">Spa</string>
+    <string name="atm">Atm</string>
+    <string name="settings_header">Settings</string>
+    <string name="settings_apply">Apply</string>
+    <string name="settings_cancel">Cancel</string>
+</resources>
