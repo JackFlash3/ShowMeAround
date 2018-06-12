@@ -2,7 +2,6 @@ package com.example.prodigalson7.showme.ShowMeAround;
 
 import com.example.prodigalson7.showme.okhttp.PlaceApiService;
 import com.example.prodigalson7.showme.okhttp.RouteApiService;
-import com.example.prodigalson7.showme.okhttp.TwitchAPI;
 
 import javax.inject.Singleton;
 

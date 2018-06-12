@@ -8,15 +8,12 @@ import com.example.prodigalson7.showme.Model.MyLocation;
 import com.example.prodigalson7.showme.Model.Target;
 import com.example.prodigalson7.showme.Model.Util;
 import com.example.prodigalson7.showme.okhttp.PlaceApiService;
-import com.example.prodigalson7.showme.okhttp.TwitchAPI;
 import com.example.prodigalson7.showme.okhttp.apimodelplaces.Places;
 import com.example.prodigalson7.showme.okhttp.apimodelplaces.Result;
 
 
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
