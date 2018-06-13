@@ -1,6 +1,7 @@
 package com.example.prodigalson7.showme.ShowMeAround;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -232,7 +233,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     //set back button to return to IntroActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        presenter.onKeyDown(keyCode, event);
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+            finishAffinity();
         return super.onKeyDown(keyCode, event);
     }
 

@@ -1,8 +1,5 @@
 package com.example.prodigalson7.showme.ShowMeAround;
 
-import android.app.Activity;
-import android.view.KeyEvent;
-
 import com.example.prodigalson7.showme.DataBase.DataBaseConnector;
 import com.example.prodigalson7.showme.Model.MyLocation;
 import com.example.prodigalson7.showme.okhttp.apimodel.Step;
@@ -11,9 +8,7 @@ import com.example.prodigalson7.showme.Model.Util;
 import com.example.prodigalson7.showme.ShowMeAround.ShowMeAroundServices.ShowMeAroundServices;
 import java.util.List;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
-
 import static com.example.prodigalson7.showme.Model.Util.Subject.Atm;
 import static com.example.prodigalson7.showme.Model.Util.Subject.Bar;
 import static com.example.prodigalson7.showme.Model.Util.Subject.Coffee;
@@ -149,13 +144,6 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
         model.rxUnsubscribe();
     }
 
-
-    //set back button to return to IntroActivity
-    @Override
-    public void onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-            ( (Activity)(view)).finishAffinity();
-    }
 
     //get the route between the current location and the target
     @Override

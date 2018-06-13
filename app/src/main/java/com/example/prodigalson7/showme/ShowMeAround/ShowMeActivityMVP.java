@@ -40,8 +40,6 @@ public interface ShowMeActivityMVP {
 
         public List<Target> getData();      //get the data
 
-        public void onKeyDown(int keyCode, KeyEvent event);      //callback of keydown press
-
         public void onMarkerClick();          // Called when the user clicks a marker
 
         public void onLocationClicked();       //apply when a line in the recycler view is clicked
