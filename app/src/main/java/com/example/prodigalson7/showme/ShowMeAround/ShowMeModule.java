@@ -13,12 +13,12 @@ import dagger.Provides;
 public class ShowMeModule {
 
     @Provides
-    public ShowMeActivityMVP.Presenter provideTopMoviesActivityPresenter(ShowMeActivityMVP.Model showMeModel) {
+    public ShowMeActivityMVP.Presenter provideShowMeActivityPresenter(ShowMeActivityMVP.Model showMeModel) {
         return new ShowMePresenter(showMeModel);
     }
 
     @Provides
-    public ShowMeActivityMVP.Model provideTopMoviesActivityModel(Repository repository, RouteApiService routeApiService) {
+    public ShowMeActivityMVP.Model provideShowMeActivityModel(Repository repository, RouteApiService routeApiService) {
         return new ShowMeModel(repository, routeApiService);
     }
 

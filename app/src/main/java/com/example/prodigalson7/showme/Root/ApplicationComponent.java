@@ -12,7 +12,7 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class, ApiModuleForPlaces.class, ApiModuleForRoutes.class,ShowMeModule.class})
 public interface ApplicationComponent {
 
-    //we inject only the TopMoviesActivity because we have only one Activity in our project
+    //we inject only the MapsActivity because we have only one Activity in our project
     void inject(MapsActivity target);
 
 }

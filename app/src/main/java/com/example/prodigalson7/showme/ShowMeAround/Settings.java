@@ -61,6 +61,7 @@ public class Settings extends Dialog {
         super(context);
         this.context = context;
         this.adapter = adapter;
+
     }
 
     @Override

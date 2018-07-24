@@ -27,6 +27,7 @@ public class Target {
         this.photo_ref = photo_ref;
         this.placeID = placeID;
         this.photo = null;
+
     }
 
     public int getId() {  return id; }

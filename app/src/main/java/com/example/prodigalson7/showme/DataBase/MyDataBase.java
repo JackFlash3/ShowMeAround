@@ -19,7 +19,6 @@ public class MyDataBase extends SQLiteOpenHelper
 	private static final String PLACE_ID="place_id";
 	private static final String PHOTO_REF = "photo_ref";
 
-
 	private static final String CREATE_TABLE_DESTINATIONS = "CREATE TABLE "+ DESTINATIONS_TABLE
 			+"("+ TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+  NAME+" TEXT, "+ ADDRESS +" TEXT, "+ SUBJECT +" TEXT, "+RATING+" DOUBLE, "

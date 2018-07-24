@@ -257,7 +257,7 @@ public class ShowMeAroundServices implements IShowMeAround {
     @Override
     public void setNewPosition() {
         //1. first remove the marker of the old position
-        marker.remove();
+           marker.remove();
         //2. add the new marker
         LatLng berlin = new LatLng(location.getLat(), location.getLon());
         marker  = mMap.addMarker(new MarkerOptions().position(berlin).title("Marker in town"));

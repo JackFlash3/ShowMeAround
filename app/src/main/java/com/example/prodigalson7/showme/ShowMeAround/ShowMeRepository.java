@@ -12,7 +12,8 @@ import com.example.prodigalson7.showme.okhttp.apimodelplaces.Places;
 import com.example.prodigalson7.showme.okhttp.apimodelplaces.Result;
 
 
-
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observable;

@@ -22,7 +22,6 @@ public class ApiModuleForRoutes {
     public final String BASE_URL = "https://maps.googleapis.com/maps/api/directions/";
     public final String API_KEY = "AIzaSyAc63LwuQZ_6yjFJvpkHyelI8DQavkcT0E";
 
-
     @Provides
     public OkHttpClient provideClient() {
 

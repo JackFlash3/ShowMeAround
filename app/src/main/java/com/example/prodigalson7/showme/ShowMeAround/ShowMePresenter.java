@@ -40,12 +40,10 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
     after the view is destroyed
 */
 
-
     @Override
     public void setView(ShowMeActivityMVP.View view)
     {
           this.view = view;
-
     }
 
     @Override

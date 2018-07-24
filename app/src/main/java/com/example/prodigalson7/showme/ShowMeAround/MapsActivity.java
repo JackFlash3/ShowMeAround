@@ -1,7 +1,6 @@
 package com.example.prodigalson7.showme.ShowMeAround;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -10,9 +9,10 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +20,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.ActivityCompat;
-
-
 import com.example.prodigalson7.showme.Adapters.TargetsRecyclerAdapter;
 import com.example.prodigalson7.showme.Model.MyLocation;
 import com.example.prodigalson7.showme.Model.Util;
@@ -109,21 +107,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         //5.   Set GPS manager
         lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (android.location.LocationListener) this);
-        lm.addGpsStatusListener(this);
-        Location currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (currentLocation != null)
-            Util.getInstance().setCurrentLocation(new MyLocation(currentLocation.getLatitude(),currentLocation.getLongitude()));
-        else
-            Util.getInstance().setCurrentLocation(new MyLocation(52.5200,13.4050));         //Berlin Location
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+                }
+            }
 
-        //6. floating button
-        this.fab.setOnClickListener(fabListener);
-        //7. load data from  sharedPreferences
-        this.loadFromSharedPreferences();
+            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (android.location.LocationListener) this);
+            lm.addGpsStatusListener(this);
+            Location currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (currentLocation != null)
+                Util.getInstance().setCurrentLocation(new MyLocation(currentLocation.getLatitude(), currentLocation.getLongitude()));
+            else
+                Util.getInstance().setCurrentLocation(new MyLocation(52.5200, 13.4050));         //Berlin Location
+
+            //6. floating button
+            this.fab.setOnClickListener(fabListener);
+            //7. load data from  sharedPreferences
+            this.loadFromSharedPreferences();
+        } catch(Exception e){
+            String msg = e.getMessage();
+        }
     }
 
 //perform first search
@@ -133,6 +139,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         //0. set the view and the Srvices in the presenter
         presenter.setView(this);                              //setting the Activity in the Presenter
         presenter.setServices(mServices);             //setting the services object in the presenter
+
+      /*  TestGson testGson = new TestGson();
+        testGson.downloadMoviesList();*/
         try {
         //1. clear the data
         //2. clean DB
@@ -159,6 +168,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
            super.onDestroy();
            presenter.rxUnsubscribe();
      }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -228,6 +238,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onProviderDisabled(String s) {
+
     }
 
     //set back button to return to IntroActivity
@@ -301,7 +312,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void configureRecyclerView(){
         targetsRVAdapter = new TargetsRecyclerAdapter(this, presenter.getData());
         targetsRV.setAdapter(targetsRVAdapter);
-        targetsRV.setLayoutManager(new LinearLayoutManager(this));
+        targetsRV.setLayoutManager(new LinearLayoutManager(this));  //use Linear manager
         targetsRVAdapter.setListener(this);                         //setting the delegate
     }
 
@@ -320,5 +331,65 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
        presenter.loadImages();
        //3.6. Update the RecyclerView Adapter
        targetsRVAdapter.notifyDataSetChanged();
+
+       TestOut test = new TestOut() {
+           @Override
+           protected void foo() {
+             Thread t = new Thread(new Runnable() {
+                 @Override
+                 public void run() {
+                     int x = 1;
+
+                 }
+             });
+
+           }
+
+           @Override
+           protected void foo2() {
+
+           }
+       };
+        TestOut.TestIn t = test.new TestIn();
+        int a = t.doSomething();
+        test.m.doSomething();
+        test.num++;
+        MyInterface.MyInterface2 m = new MyInterface.MyInterface2(){};
+   }
+
+   public interface MyInterface{
+       public int x = 1;
+
+       public  static interface MyInterface2{
+           public int y = x;
+       }
+   }
+
+   public abstract  static class TestOut{
+       private int num;
+       TestIn m = new TestIn();
+
+       protected  abstract void foo();
+       protected abstract void foo2();
+       private class LetsSee{
+           private void doSomething(){
+
+           }
+       }
+       private class TestIn{
+           private int doSomething(){
+               LetsSee l = new LetsSee();
+               l.doSomething();
+               num = 1;
+               return num;}
+       }
+
+       private class TestIn2{
+
+           private void foo3(){
+               TestIn t = new TestIn();
+               t.doSomething();
+           }
+       }
    }
 }
