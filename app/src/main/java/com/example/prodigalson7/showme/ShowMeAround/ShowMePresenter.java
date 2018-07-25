@@ -151,7 +151,7 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
         //2. draw the route to the destination
         mServices.drawPolyLine(mSteps);
         //3. focus camera on the target
-        mServices.focusCameraOnNewLocation();
+        mServices.focusCameraOnNewLocation(false);
     }
 
     //apply when a line in the recycler view is clicked
@@ -162,7 +162,7 @@ public class ShowMePresenter implements ShowMeActivityMVP.Presenter {
         //2. draw the route to the destination
         mServices.drawPolyLine(mSteps);
         //3. focus camera on the target
-        mServices.focusCameraOnNewLocation();
+        mServices.focusCameraOnNewLocation(true);
     }
 
     @Override

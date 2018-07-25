@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -110,18 +111,23 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         try {
             if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+                    return;
+          //          requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+          //          requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+          //          while ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) &&
+          //                      (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)){
+             //       }
                 }
             }
 
-            lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (android.location.LocationListener) this);
-            lm.addGpsStatusListener(this);
-            Location currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (currentLocation != null)
-                Util.getInstance().setCurrentLocation(new MyLocation(currentLocation.getLatitude(), currentLocation.getLongitude()));
-            else
-                Util.getInstance().setCurrentLocation(new MyLocation(52.5200, 13.4050));         //Berlin Location
+                lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (android.location.LocationListener) this);
+                lm.addGpsStatusListener(this);
+                Location currentLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                if (currentLocation != null)
+                    Util.getInstance().setCurrentLocation(new MyLocation(currentLocation.getLatitude(), currentLocation.getLongitude()));
+                else
+                    Util.getInstance().setCurrentLocation(new MyLocation(52.5200, 13.4050));         //Berlin Location
 
             //6. floating button
             this.fab.setOnClickListener(fabListener);

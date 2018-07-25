@@ -88,11 +88,16 @@ public class ShowMeAroundServices implements IShowMeAround {
     }
 
     @Override
-    public void focusCameraOnNewLocation()
+    public void focusCameraOnNewLocation(boolean markerOrRecyclerCLicked)
     {
+        MyLocation currentLocation = null;
         //1. set focus on the new destination
-        MyLocation location = new MyLocation(marker.getPosition().latitude, marker.getPosition().longitude);
-        LatLng destination = new LatLng(location.getLat(), location.getLon());
+        if (!markerOrRecyclerCLicked) {
+            currentLocation = new MyLocation(marker.getPosition().latitude, marker.getPosition().longitude);
+        } else {
+            currentLocation = this.location;
+        }
+        LatLng destination = new LatLng(currentLocation.getLat(), currentLocation.getLon());
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(destination));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(13));

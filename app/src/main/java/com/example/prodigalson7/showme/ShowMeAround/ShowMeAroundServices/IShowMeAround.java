@@ -29,8 +29,8 @@ public interface IShowMeAround {
     public void setLocation(MyLocation location);             //set a target for drawLine
 
     public MyLocation getLocation();                                      //set a target for drawLine
-
-    public void focusCameraOnNewLocation();                  //set camera on the target
+    //markerOrRecyclerCLicked : true - recycler item was clicked. false - marker was clicked
+    public void focusCameraOnNewLocation(boolean markerOrRecyclerCLicked);                  //set camera on the target
 
     public void setMap(final GoogleMap mMap);              //sertting the google map
 
